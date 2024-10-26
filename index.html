@@ -283,5 +283,67 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const signUpForm = document.getElementById("signUpForm");
+    const loginForm = document.getElementById("signInForm");
+
+    // Handle Registration Form Submission
+    signUpForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const fullName = document.getElementById("fullName").value;
+        const username = document.getElementById("signUpUsername").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("signUpPassword").value;
+
+        // Retrieve existing users from localStorage or initialize empty array
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Check if the username already exists
+        if (users.some(user => user.username === username)) {
+            alert("Username already exists. Please choose another one.");
+            return; // Stop registration if the username is taken
+        }
+
+        // Create user object and add to users array
+        const newUser = { fullName, username, email, password };
+        users.push(newUser);
+
+        // Save updated users array back to localStorage
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("Registration successful! Please sign in.");
+        openTab(event, "signIn");
+    });
+
+    // Handle Login Form Submission
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById("signInUsername").value;
+        const password = document.getElementById("signInPassword").value;
+
+        // Retrieve users from localStorage
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Find user matching the entered username and password
+        const storedUser = users.find(user => user.username === username && user.password === password);
+
+        // Check if the stored user data matches entered credentials
+        if (storedUser) {
+            // Save the username in localStorage for dashboard access
+            localStorage.setItem("loggedInUser", storedUser.fullName);
+            
+            // Redirect to dashboard
+            window.location.href = "dash.html";
+        } else {
+            // Show an error message if credentials are invalid
+            alert("Invalid username or password. Please try again.");
+        }
+    });
+});
+
+    </script>
 </body>
 </html>
