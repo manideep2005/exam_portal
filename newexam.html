@@ -32,17 +32,35 @@ h1 {
 }
 
 .navbar {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
     margin: 20px 0;
 }
 
-.navbar a {
-    text-decoration: none;
-    color: white;
-    padding: 10px 15px;
+.navbar button {
     background-color: #0073e6;
+    color: white;
+    border: none;
+    padding: 10px 15px;
     border-radius: 5px;
-    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
+
+.navbar button:hover {
+    background-color: #005bb5;
+}
+
+.navbar button.logout {
+    background-color: #d9534f; /* Different color for logout */
+}
+
+.navbar button.logout:hover {
+    background-color: #c9302c;
+}
+
 
 .form-container {
     margin-top: 20px;
@@ -97,16 +115,17 @@ textarea {
 <body>
     <div class="container">
         <h1>Online Examination Portal</h1>
-        <p>Welcome devaanand...</p>
+        <p>Welcome Manideep...</p>
 
         <nav class="navbar">
-            <a href="#">Home</a>
-            <a href="#">Administration Console</a>
-            <a href="#">Available Exams</a>
-            <a href="#">Previous Results</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Logout</a>
+            <button onclick="location.href='#'">Home</button>
+            <button onclick="location.href='#'">Administration Console</button>
+            <button onclick="location.href='#'">Available Exams</button>
+            <button onclick="location.href='#'">Previous Results</button>
+            <button onclick="location.href='#'">Contact Us</button>
+            <button onclick="location.href='#'" class="logout">Logout</button>
         </nav>
+        
 
         <div class="form-container">
             <h2>New Exam Registration</h2>
