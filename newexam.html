@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Examination Portal - Add New Exam</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    color: #1a1aaf;
+}
+
+.navbar {
+    margin: 20px 0;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    background-color: #0073e6;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.form-container {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.form-container h2 {
+    color: #1a1aaf;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    resize: none;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.btn:hover {
+    background-color: #005bb5;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Online Examination Portal</h1>
+        <p>Welcome devaanand...</p>
+
+        <nav class="navbar">
+            <a href="#">Home</a>
+            <a href="#">Administration Console</a>
+            <a href="#">Available Exams</a>
+            <a href="#">Previous Results</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Logout</a>
+        </nav>
+
+        <div class="form-container">
+            <h2>New Exam Registration</h2>
+            <form action="#" method="post">
+                <label for="examID">Exam ID</label>
+                <input type="text" id="examID" name="examID" placeholder="Enter a 5 digit Unique ID" required>
+
+                <label for="examName">Exam Name</label>
+                <input type="text" id="examName" name="examName" required>
+
+                <label for="examDescription">Exam Description</label>
+                <textarea id="examDescription" name="examDescription" rows="4"></textarea>
+
+                <div class="button-container">
+                    <button type="submit" class="btn">Add Exam</button>
+                    <button type="reset" class="btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
