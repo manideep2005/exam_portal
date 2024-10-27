@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Examination Portal - Add New Exam</title>
+    <title>Online Examination Portal</title>
     <link rel="stylesheet" href="style.css">
     <style>
         * {
@@ -12,7 +12,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f4f4f9;
     margin: 0;
     padding: 20px;
 }
@@ -20,23 +20,39 @@ body {
 .container {
     max-width: 800px;
     margin: auto;
+    background: #fff;
     padding: 20px;
-    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
     text-align: center;
+    color: #333;
 }
 
-h1 {
-    color: #1a1aaf;
+.form-container, .exam-list {
+    margin-top: 20px;
 }
 
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+/* Navigation Bar Styling */
 .navbar {
     display: flex;
-    gap: 10px;
     justify-content: center;
-    align-items: center;
-    margin: 20px 0;
+    background-color: #0073e6;
+    padding: 10px;
 }
 
 .navbar button {
@@ -44,70 +60,59 @@ h1 {
     color: white;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+    margin: 0 5px;
     font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .navbar button:hover {
     background-color: #005bb5;
 }
 
-.navbar button.logout {
-    background-color: #d9534f; /* Different color for logout */
+.navbar .logout {
+    background-color: #e60000;
 }
 
-.navbar button.logout:hover {
-    background-color: #c9302c;
+.navbar .logout:hover {
+    background-color: #cc0000;
 }
 
-
-.form-container {
-    margin-top: 20px;
-    text-align: left;
-}
-
-.form-container h2 {
-    color: #1a1aaf;
-    text-align: center;
-}
-
-label {
+button {
     display: block;
-    margin: 10px 0 5px;
-    color: #333;
-}
-
-input[type="text"],
-textarea {
     width: 100%;
     padding: 10px;
-    margin: 5px 0 15px;
-    border: 1px solid #ccc;
+    background-color: #0073e6;
+    color: white;
+    border: none;
     border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
-textarea {
-    resize: none;
+button:hover {
+    background-color: #005bb5;
 }
 
-.button-container {
-    text-align: center;
+table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
 }
 
-.btn {
-    background-color: #0073e6;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 0 5px;
+table, th, td {
+    border: 1px solid #ddd;
 }
 
-.btn:hover {
-    background-color: #005bb5;
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #0073e6;
+    color: white;
 }
 
     </style>
@@ -115,36 +120,120 @@ textarea {
 <body>
     <div class="container">
         <h1>Online Examination Portal</h1>
-        <p>Welcome Manideep...</p>
-
         <nav class="navbar">
             <button onclick="location.href='#'">Home</button>
             <button onclick="location.href='#'">Administration Console</button>
             <button onclick="location.href='#'">Available Exams</button>
             <button onclick="location.href='#'">Previous Results</button>
             <button onclick="location.href='#'">Contact Us</button>
-            <button onclick="location.href='#'" class="logout">Logout</button>
+            <button onclick="location.href='index.html'" class="logout">Logout</button>
         </nav>
-        
-
+    
         <div class="form-container">
-            <h2>New Exam Registration</h2>
-            <form action="#" method="post">
-                <label for="examID">Exam ID</label>
-                <input type="text" id="examID" name="examID" placeholder="Enter a 5 digit Unique ID" required>
+            <h2>Add New Exam</h2>
+            <form id="addExamForm">
+                <label for="examId">Exam ID:</label>
+                <input type="text" id="examId" required placeholder="Enter a 5-digit ID">
 
-                <label for="examName">Exam Name</label>
-                <input type="text" id="examName" name="examName" required>
+                <label for="examName">Exam Name:</label>
+                <input type="text" id="examName" required placeholder="Enter exam name">
 
-                <label for="examDescription">Exam Description</label>
-                <textarea id="examDescription" name="examDescription" rows="4"></textarea>
+                <label for="examDescription">Description:</label>
+                <textarea id="examDescription" placeholder="Enter exam description"></textarea>
 
-                <div class="button-container">
-                    <button type="submit" class="btn">Add Exam</button>
-                    <button type="reset" class="btn">Cancel</button>
-                </div>
+                <button type="submit">Add Exam</button>
             </form>
         </div>
+
+        <div class="exam-list">
+            <h2>Active Exams Directory</h2>
+            <table id="examTable">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Exam ID</th>
+                        <th>Exam Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exams will be added here dynamically -->
+                </tbody>
+            </table>
+            <button id="removeExam">Remove Selected Exam</button>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const examTableBody = document.getElementById("examTable").querySelector("tbody");
+    const addExamForm = document.getElementById("addExamForm");
+    const removeExamButton = document.getElementById("removeExam");
+
+    // Load exams from localStorage
+    function loadExams() {
+        const exams = JSON.parse(localStorage.getItem("exams") || "[]");
+        examTableBody.innerHTML = ""; // Clear current rows
+        exams.forEach(exam => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><input type="radio" name="selectedExam" value="${exam.id}"></td>
+                <td>${exam.id}</td>
+                <td>${exam.name}</td>
+            `;
+            examTableBody.appendChild(row);
+        });
+    }
+
+    // Save a new exam to localStorage
+    function addExam(exam) {
+        const exams = JSON.parse(localStorage.getItem("exams") || "[]");
+        exams.push(exam);
+        localStorage.setItem("exams", JSON.stringify(exams));
+    }
+
+    // Remove selected exam
+    function removeSelectedExam() {
+        const selectedExam = document.querySelector("input[name='selectedExam']:checked");
+        if (!selectedExam) {
+            alert("Please select an exam to remove.");
+            return;
+        }
+
+        const examId = selectedExam.value;
+        let exams = JSON.parse(localStorage.getItem("exams") || "[]");
+        exams = exams.filter(exam => exam.id !== examId);
+        localStorage.setItem("exams", JSON.stringify(exams));
+        loadExams();
+    }
+
+    // Handle form submission
+    addExamForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const examId = document.getElementById("examId").value;
+        const examName = document.getElementById("examName").value;
+        const examDescription = document.getElementById("examDescription").value;
+
+        const exam = {
+            id: examId,
+            name: examName,
+            description: examDescription
+        };
+
+        addExam(exam);
+        loadExams();
+
+        // Clear form
+        addExamForm.reset();
+    });
+
+    // Handle remove button click
+    removeExamButton.addEventListener("click", removeSelectedExam);
+
+    // Initial load
+    loadExams();
+});
+
+    </script>
 </body>
 </html>
