@@ -2,161 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Online Examination Portal</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-   
-       <style>
-       
-       * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   font-family: 'Arial', sans-serif;
-   }
-   
-   body {
-   background: #cfcfd9;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 100vh;
-   }
-   .head{
-   text-align: start;
-   text-align: top;
-   }
-   .container {
-   display: flex;
-   width: 80%;
-   height: 70vh;
-   background: rgba(255, 255, 255, 0.2);
-   border-radius: 15px;
-   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-   overflow: hidden;
-   }
-   
-   .image-box {
-   flex: 1.5;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background: linear-gradient(to right, #ff4e50, #f9d423);
-   }
-   
-   .image-box img {
-   width: 100%;
-   height: 100%;
-   object-fit: cover;
-   border-radius: 15px 0 0 15px;
-   }
-   
-   .login-box {
-   flex: 1.5;
-   background: #fff;
-   display: flex;
-   flex-direction: column;
-   padding: 40px;
-   }
-   
-   .form-container {
-   flex: 1;
-   }
-   
-   h2 {
-   text-align: center;
-   margin-bottom: 20px;
-   color: #333;
-   }
-   
-   .input-box {
-   position: relative;
-   margin: 30px 0;
-   }
-   
-   .input-box input {
-   width: 50%;
-   padding: 10px 10px 10px 40px;
-   font-size: 16px;
-   color: #333;
-   border: none;
-   outline: none;
-   background: #f0f0f0;
-   border-radius: 5px;
-   }
-   
-   .input-box label {
-   position: absolute;
-   left: 40px;
-   top: 10px;
-   font-size: 16px;
-   color: #666;
-   pointer-events: none;
-   transition: 0.3s ease;
-   }
-   
-   .input-box input:focus + label,
-   .input-box input:valid + label {
-   top: -20px;
-   font-size: 12px;
-   color: #474344;
-   }
-   
-   button {
-   width: 50%;
-   padding: 12px;
-   background: #514f50;
-   border: none;
-   color: #fff;
-   font-size: 16px;
-   cursor: pointer;
-   border-radius: 5px;
-   transition: background 0.3s ease;
-   }
-   
-   button:hover {
-   background: #060606;
-   }
-   
-   .tab-container {
-   display: flex;
-   justify-content: center;
-   margin-top: 20px;
-   }
-   
-   .tab-link {
-   padding: 10px 20px;
-   cursor: pointer;
-   border: none;
-   background: #fff;
-   color: #333;
-   font-weight: bold;
-   margin: 0 10px;
-   border-radius: 5px;
-   outline: none;
-   transition: 0.3s ease-in-out;
-   }
-   
-   .tab-link.active {
-   background: #514f50;
-   color: #fff;
-   }
-   
-   .tab-content {
-   display: none;
-   opacity: 0;
-   transform: translateX(-50px);
-   }
-   
-   .tab-content.active {
-   display: block;
-   opacity: 1;
-   transform: translateX(0);
-   transition: opacity 0.5s ease, transform 0.5s ease;
-   }
-   
-   </style>
+body {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 900px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.image-box {
+    flex: 1.5;
+    background: linear-gradient(to right, #ff4e50, #f9d423);
+    border-radius: 15px 0 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-box img {
+    width: 80%;
+    height: auto;
+    border-radius: 15px 0 0 15px;
+}
+
+.login-box {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.tab-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ff4e50;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.tab.active {
+    background-color: #ff4e50;
+    color: white;
+}
+
+.form-group {
+    margin: 20px 0;
+    position: relative;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #ff4e50;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #ff4e50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #f9d423;
+}
+
+.hidden {
+    display: none;
+}
+
+.tab-content {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-content.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
     </style>
 </head>
 <body>
@@ -166,184 +138,123 @@
             <img src="pic.png" alt="Login Illustration">
         </div>
         <div class="login-box">
-            <div class="form-container">
-                <div id="signIn" class="tab-content active">
-                    <h2>Sign In</h2>
-                    <form id="signInForm">
-                        <div class="input-box">
-                            <input type="text" id="signInUsername" required>
-                            <label>Username</label>
-                        </div>
-                        <div class="input-box">
-                            <input type="password" id="signInPassword" required>
-                            <label>Password</label>
-                        </div>
-                        <button type="submit" class="login-btn">Login</button>
-                    </form>
-                </div>
-                <div id="signUp" class="tab-content">
-                    <h2>Sign Up</h2>
-                    <form id="signUpForm">
-                        <div class="input-box">
-                            <input type="text" id="fullName" required>
-                            <label>Full Name</label>
-                        </div>
-                        <div class="input-box">
-                            <input type="text" id="signUpUsername" required>
-                            <label>Username</label>
-                        </div>
-                        <div class="input-box">
-                            <input type="email" id="email" required>
-                            <label>Email</label>
-                        </div>
-                        <div class="input-box">
-                            <input type="password" id="signUpPassword" required>
-                            <label>Password</label>
-                        </div>
-                        <button type="submit" class="signup-btn">Register</button>
-                    </form>
-                </div>
-            </div>
             <div class="tab-container">
-                <button class="tab-link active" onclick="openTab(event, 'signIn')">Sign In</button>
-                <button class="tab-link" onclick="openTab(event, 'signUp')">Sign Up</button>
+                <div class="tab active" onclick="switchTab('student')">Student</div>
+                <div class="tab" onclick="switchTab('faculty')">Faculty</div>
+            </div>
+
+            <!-- Student Registration/Login Form -->
+            <div id="student" class="tab-content active">
+                <h2>Student Login</h2>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <input type="text" id="studentUsername" required placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="studentPassword" required placeholder="Password">
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <button onclick="registerStudent()">Register as New Student</button>
+            </div>
+
+            <!-- Faculty Registration/Login Form -->
+            <div id="faculty" class="tab-content">
+                <h2>Faculty Login</h2>
+                <form id="facultyForm">
+                    <div class="form-group">
+                        <input type="text" id="facultyUsername" required placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="facultyPassword" required placeholder="Password">
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <button onclick="registerFaculty()">Register as New Faculty</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Tab Switching Function
-        function openTab(evt, tabName) {
-            // Get all elements with class="tab-content" and hide them
-            const tabContent = document.querySelectorAll(".tab-content");
-            tabContent.forEach(tab => tab.classList.remove("active"));
-
-            // Get all elements with class="tab-link" and remove the "active" class
-            const tabLinks = document.querySelectorAll(".tab-link");
-            tabLinks.forEach(link => link.classList.remove("active"));
-
-            // Show the current tab and add an "active" class to the clicked button
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
-
-        // Registration and Login Logic
-        document.addEventListener("DOMContentLoaded", () => {
-            const signUpForm = document.getElementById("signUpForm");
-            const loginForm = document.getElementById("signInForm");
-
-            // Handle Registration Form Submission
-            signUpForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-
-                // Get user inputs from registration form
-                const fullName = document.getElementById("fullName").value;
-                const username = document.getElementById("signUpUsername").value;
-                const email = document.getElementById("email").value;
-                const password = document.getElementById("signUpPassword").value;
-
-                // Create user object and save to localStorage
-                const userData = {
-                    fullName,
-                    username,
-                    email,
-                    password
-                };
-
-                // Store user data in localStorage (use JSON string)
-                localStorage.setItem(username, JSON.stringify(userData));
-
-                // Alert successful registration and switch to Sign-In tab
-                alert("Registration successful! Please sign in.");
-                openTab(event, "signIn");
-            });
-
-            // Handle Login Form Submission
-            loginForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-
-                // Get user inputs from login form
-                const username = document.getElementById("signInUsername").value;
-                const password = document.getElementById("signInPassword").value;
-
-                // Retrieve user data from localStorage
-                const storedUser = JSON.parse(localStorage.getItem(username));
-
-                // Check if the stored user data matches entered credentials
-                if (storedUser && storedUser.password === password) {
-                    // Save the username in localStorage for dashboard access
-                    localStorage.setItem("loggedInUser", storedUser.fullName);
-                    
-                    // Redirect to dashboard
-                    window.location.href = "dash.html";
+        // Function to switch tabs
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const tabLinks = document.querySelectorAll('.tab');
+            tabs.forEach(t => {
+                if (t.id === tab) {
+                    t.classList.add('active');
+                    gsap.fromTo(t, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 });
                 } else {
-                    // Show an error message if credentials are invalid
-                    alert("Invalid username or password. Please try again.");
+                    gsap.to(t, { opacity: 0, y: 20, duration: 0.3, onComplete: () => {
+                        t.classList.remove('active');
+                    }});
                 }
             });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-    const signUpForm = document.getElementById("signUpForm");
-    const loginForm = document.getElementById("signInForm");
-
-    // Handle Registration Form Submission
-    signUpForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const fullName = document.getElementById("fullName").value;
-        const username = document.getElementById("signUpUsername").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("signUpPassword").value;
-
-        // Retrieve existing users from localStorage or initialize empty array
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-
-        // Check if the username already exists
-        if (users.some(user => user.username === username)) {
-            alert("Username already exists. Please choose another one.");
-            return; // Stop registration if the username is taken
+            tabLinks.forEach(link => link.classList.remove('active'));
+            document.querySelector(`.tab[onclick="switchTab('${tab}')"]`).classList.add('active');
         }
 
-        // Create user object and add to users array
-        const newUser = { fullName, username, email, password };
-        users.push(newUser);
+        // Function to register a new student and save to local storage
+        function registerStudent() {
+            const username = document.getElementById("studentUsername").value;
+            const password = document.getElementById("studentPassword").value;
 
-        // Save updated users array back to localStorage
-        localStorage.setItem("users", JSON.stringify(users));
-
-        alert("Registration successful! Please sign in.");
-        openTab(event, "signIn");
-    });
-
-    // Handle Login Form Submission
-    loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const username = document.getElementById("signInUsername").value;
-        const password = document.getElementById("signInPassword").value;
-
-        // Retrieve users from localStorage
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-
-        // Find user matching the entered username and password
-        const storedUser = users.find(user => user.username === username && user.password === password);
-
-        // Check if the stored user data matches entered credentials
-        if (storedUser) {
-            // Save the username in localStorage for dashboard access
-            localStorage.setItem("loggedInUser", storedUser.fullName);
-            
-            // Redirect to dashboard
-            window.location.href = "dash.html";
-        } else {
-            // Show an error message if credentials are invalid
-            alert("Invalid username or password. Please try again.");
+            if (username && password) {
+                let students = JSON.parse(localStorage.getItem("students")) || [];
+                students.push({ username, password });
+                localStorage.setItem("students", JSON.stringify(students));
+                alert("Student registered successfully!");
+            } else {
+                alert("Please enter both username and password.");
+            }
         }
-    });
-});
 
+        // Function to register a new faculty and save to local storage
+        function registerFaculty() {
+            const username = document.getElementById("facultyUsername").value;
+            const password = document.getElementById("facultyPassword").value;
+
+            if (username && password) {
+                let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+                faculty.push({ username, password });
+                localStorage.setItem("faculty", JSON.stringify(faculty));
+                alert("Faculty registered successfully!");
+            } else {
+                alert("Please enter both username and password.");
+            }
+        }
+
+        // Handle student login
+        document.getElementById("studentForm").onsubmit = function (event) {
+            event.preventDefault();
+            const username = document.getElementById("studentUsername").value;
+            const password = document.getElementById("studentPassword").value;
+            const students = JSON.parse(localStorage.getItem("students")) || [];
+
+            const studentExists = students.some(student => student.username === username && student.password === password);
+            if (studentExists) {
+                alert("Student Login Successful!");
+                window.location.href = "dashboard.html"; // Redirect to dashboard
+            } else {
+                alert("Invalid Student credentials.");
+            }
+        };
+
+        // Handle faculty login
+        document.getElementById("facultyForm").onsubmit = function (event) {
+            event.preventDefault();
+            const username = document.getElementById("facultyUsername").value;
+            const password = document.getElementById("facultyPassword").value;
+            const faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+            const facultyExists = faculty.some(fac => fac.username === username && fac.password === password);
+            if (facultyExists) {
+                alert("Faculty Login Successful!");
+                window.location.href = "dashboard.html"; // Redirect to dashboard
+            } else {
+                alert("Invalid Faculty credentials.");
+            }
+        };
     </script>
 </body>
 </html>

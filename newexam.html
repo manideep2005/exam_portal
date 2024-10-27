@@ -7,113 +7,114 @@
     <link rel="stylesheet" href="style.css">
     <style>
         * {
-    box-sizing: border-box;
-}
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 20px;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-h1, h2 {
-    text-align: center;
-    color: #333;
-}
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
 
-.form-container, .exam-list {
-    margin-top: 20px;
-}
+        .form-container, .exam-list {
+            margin-top: 20px;
+        }
 
-label {
-    display: block;
-    margin-top: 10px;
-}
+        label {
+            display: block;
+            margin-top: 10px;
+        }
 
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-/* Navigation Bar Styling */
-.navbar {
-    display: flex;
-    justify-content: center;
-    background-color: #0073e6;
-    padding: 10px;
-}
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
 
-.navbar button {
-    background-color: #0073e6;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin: 0 5px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
+        /* Navigation Bar Styling */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #0073e6;
+            padding: 10px;
+        }
 
-.navbar button:hover {
-    background-color: #005bb5;
-}
+        .navbar button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
-.navbar .logout {
-    background-color: #e60000;
-}
+        .navbar button:hover {
+            background-color: #005bb5;
+        }
 
-.navbar .logout:hover {
-    background-color: #cc0000;
-}
+        .navbar .logout {
+            background-color: #e60000;
+        }
 
-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #0073e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    cursor: pointer;
-}
+        .navbar .logout:hover {
+            background-color: #cc0000;
+        }
 
-button:hover {
-    background-color: #005bb5;
-}
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+        button:hover {
+            background-color: #005bb5;
+        }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-th, td {
-    padding: 10px;
-    text-align: center;
-}
+        table, th, td {
+            border: 1px solid #ddd;
+        }
 
-th {
-    background-color: #0073e6;
-    color: white;
-}
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #0073e6;
+            color: white;
+        }
 
     </style>
 </head>
@@ -121,7 +122,7 @@ th {
     <div class="container">
         <h1>Online Examination Portal</h1>
         <nav class="navbar">
-            <button onclick="location.href='#'">Home</button>
+            <button onclick="location.href='dashboard.html'">Home</button>
             <button onclick="location.href='#'">Administration Console</button>
             <button onclick="location.href='#'">Available Exams</button>
             <button onclick="location.href='#'">Previous Results</button>
@@ -141,6 +142,9 @@ th {
                 <label for="examDescription">Description:</label>
                 <textarea id="examDescription" placeholder="Enter exam description"></textarea>
 
+                <label for="examDate">Exam Date:</label>
+                <input type="date" id="examDate" required>
+
                 <button type="submit">Add Exam</button>
             </form>
         </div>
@@ -153,6 +157,8 @@ th {
                         <th>Select</th>
                         <th>Exam ID</th>
                         <th>Exam Name</th>
+                        <th>Exam Date</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -165,75 +171,83 @@ th {
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-    const examTableBody = document.getElementById("examTable").querySelector("tbody");
-    const addExamForm = document.getElementById("addExamForm");
-    const removeExamButton = document.getElementById("removeExam");
+            const examTableBody = document.getElementById("examTable").querySelector("tbody");
+            const addExamForm = document.getElementById("addExamForm");
+            const removeExamButton = document.getElementById("removeExam");
 
-    // Load exams from localStorage
-    function loadExams() {
-        const exams = JSON.parse(localStorage.getItem("exams") || "[]");
-        examTableBody.innerHTML = ""; // Clear current rows
-        exams.forEach(exam => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td><input type="radio" name="selectedExam" value="${exam.id}"></td>
-                <td>${exam.id}</td>
-                <td>${exam.name}</td>
-            `;
-            examTableBody.appendChild(row);
+            // Load exams from localStorage
+            function loadExams() {
+                const exams = JSON.parse(localStorage.getItem("exams") || "[]");
+                examTableBody.innerHTML = ""; // Clear current rows
+                exams.forEach(exam => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td><input type="radio" name="selectedExam" value="${exam.id}"></td>
+                        <td>${exam.id}</td>
+                        <td>${exam.name}</td>
+                        <td>${exam.date}</td> <!-- Displaying Exam Date -->
+                        <td><button onclick="takeExam('${exam.id}')">Take Exam</button></td> <!-- Take Exam Option -->
+                    `;
+                    examTableBody.appendChild(row);
+                });
+            }
+
+            // Save a new exam to localStorage
+            function addExam(exam) {
+                const exams = JSON.parse(localStorage.getItem("exams") || "[]");
+                exams.push(exam);
+                localStorage.setItem("exams", JSON.stringify(exams));
+            }
+
+            // Remove selected exam
+            function removeSelectedExam() {
+                const selectedExam = document.querySelector("input[name='selectedExam']:checked");
+                if (!selectedExam) {
+                    alert("Please select an exam to remove.");
+                    return;
+                }
+
+                const examId = selectedExam.value;
+                let exams = JSON.parse(localStorage.getItem("exams") || "[]");
+                exams = exams.filter(exam => exam.id !== examId);
+                localStorage.setItem("exams", JSON.stringify(exams));
+                loadExams();
+            }
+
+            // Handle form submission
+            addExamForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const examId = document.getElementById("examId").value;
+                const examName = document.getElementById("examName").value;
+                const examDescription = document.getElementById("examDescription").value;
+                const examDate = document.getElementById("examDate").value; // Get the exam date
+
+                const exam = {
+                    id: examId,
+                    name: examName,
+                    description: examDescription,
+                    date: examDate // Include the exam date
+                };
+
+                addExam(exam);
+                loadExams();
+
+                // Clear form
+                addExamForm.reset();
+            });
+
+            // Handle remove button click
+            removeExamButton.addEventListener("click", removeSelectedExam);
+
+            // Initial load
+            loadExams();
         });
-    }
 
-    // Save a new exam to localStorage
-    function addExam(exam) {
-        const exams = JSON.parse(localStorage.getItem("exams") || "[]");
-        exams.push(exam);
-        localStorage.setItem("exams", JSON.stringify(exams));
-    }
-
-    // Remove selected exam
-    function removeSelectedExam() {
-        const selectedExam = document.querySelector("input[name='selectedExam']:checked");
-        if (!selectedExam) {
-            alert("Please select an exam to remove.");
-            return;
+        function takeExam(examId) {
+            alert(`You have selected to take the exam with ID: ${examId}`);
+            // Here you can implement the logic to start the exam
         }
-
-        const examId = selectedExam.value;
-        let exams = JSON.parse(localStorage.getItem("exams") || "[]");
-        exams = exams.filter(exam => exam.id !== examId);
-        localStorage.setItem("exams", JSON.stringify(exams));
-        loadExams();
-    }
-
-    // Handle form submission
-    addExamForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const examId = document.getElementById("examId").value;
-        const examName = document.getElementById("examName").value;
-        const examDescription = document.getElementById("examDescription").value;
-
-        const exam = {
-            id: examId,
-            name: examName,
-            description: examDescription
-        };
-
-        addExam(exam);
-        loadExams();
-
-        // Clear form
-        addExamForm.reset();
-    });
-
-    // Handle remove button click
-    removeExamButton.addEventListener("click", removeSelectedExam);
-
-    // Initial load
-    loadExams();
-});
-
     </script>
 </body>
 </html>
