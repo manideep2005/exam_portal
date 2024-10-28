@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Questions to Exam</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .question-list {
+            margin-top: 20px;
+        }
+
+        .question-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Questions to Exam</h2>
+        <form id="questionForm">
+            <label for="question">Question:</label>
+            <textarea id="question" required></textarea>
+
+            <label for="option1">Option 1:</label>
+            <input type="text" id="option1" required>
+
+            <label for="option2">Option 2:</label>
+            <input type="text" id="option2" required>
+
+            <label for="option3">Option 3:</label>
+            <input type="text" id="option3" required>
+
+            <label for="option4">Option 4:</label>
+            <input type="text" id="option4" required>
+
+            <label for="correctAnswer">Correct Answer:</label>
+            <input type="text" id="correctAnswer" required>
+
+            <button type="submit">Add Question</button>
+        </form>
+
+        <div class="question-list" id="questionList">
+            <h3>Added Questions:</h3>
+            <!-- Questions will be displayed here -->
+        </div>
+
+        <button id="takeExamButton" style="display:none;">Take Exam</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const examId = urlParams.get('examId');
+        const questionList = document.getElementById('questionList');
+        const takeExamButton = document.getElementById('takeExamButton');
+
+        // Load questions for the specific exam ID
+        function loadQuestions() {
+            const questions = JSON.parse(localStorage.getItem(`questions_${examId}`) || "[]");
+            questionList.innerHTML = ""; // Clear current questions
+            questions.forEach((question, index) => {
+                const questionItem = document.createElement("div");
+                questionItem.className = "question-item";
+                questionItem.innerHTML = `
+                    <strong>Q${index + 1}: ${question.question}</strong><br>
+                    Options: ${question.options.join(', ')}<br>
+                    Correct Answer: ${question.correctAnswer}
+                `;
+                questionList.appendChild(questionItem);
+            });
+
+            // Show the Take Exam button if there are questions
+            takeExamButton.style.display = questions.length > 0 ? 'block' : 'none';
+        }
+
+        // Handle form submission and save the question details to localStorage
+        document.getElementById('questionForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const questionText = document.getElementById('question').value;
+            const options = [
+                document.getElementById('option1').value,
+                document.getElementById('option2').value,
+                document.getElementById('option3').value,
+                document.getElementById('option4').value
+            ];
+            const correctAnswer = document.getElementById('correctAnswer').value;
+
+            const newQuestion = {
+                question: questionText,
+                options: options,
+                correctAnswer: correctAnswer
+            };
+
+            // Save the question
+            const existingQuestions = JSON.parse(localStorage.getItem(`questions_${examId}`) || "[]");
+            existingQuestions.push(newQuestion);
+            localStorage.setItem(`questions_${examId}`, JSON.stringify(existingQuestions));
+
+            alert('Question added successfully!');
+            this.reset();
+            loadQuestions(); // Reload the questions
+        });
+
+        // Handle Take Exam button click
+        takeExamButton.addEventListener('click', function () {
+            // Redirect to a new page where the exam can be taken
+            window.location.href = `take-exam.html?examId=${examId}`;
+        });
+
+        // Initial load
+        loadQuestions();
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Take Exam</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question-item {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Exam Questions</h2>
+        <div id="examQuestions">
+            <!-- Questions will be displayed here -->
+        </div>
+        <button id="submitExamButton">Submit Exam</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const examId = urlParams.get('examId');
+        const examQuestionsDiv = document.getElementById('examQuestions');
+
+        // Load questions for the specific exam ID
+        function loadQuestions() {
+            const questions = JSON.parse(localStorage.getItem(`questions_${examId}`) || "[]");
+            questions.forEach((question, index) => {
+                const questionItem = document.createElement("div");
+                questionItem.className = "question-item";
+                questionItem.innerHTML = `
+                    <strong>Q${index + 1}: ${question.question}</strong><br>
+                    Options: ${question.options.map((option, i) => `<label><input type="radio" name="question${index}" value="${option}">${option}</label>`).join('<br>')}
+                `;
+                examQuestionsDiv.appendChild(questionItem);
+            });
+        }
+
+        // Handle Submit Exam button click
+        document.getElementById('submitExamButton').addEventListener('click', function () {
+            // Here, implement logic to evaluate the answers and display the result
+            alert('Exam submitted! (Evaluation logic to be implemented)');
+        });
+
+        // Initial load
+        loadQuestions();
+    </script>
+</body>
+</html>
