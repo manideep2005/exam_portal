@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results | Online Examination Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #ff4e50;
+            color: white;
+        }
+        .filter {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .filter input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 48%;
+        }
+        button {
+            padding: 10px;
+            background: #ff4e50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #f9d423;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Exam Results</h2>
+
+        <div class="filter">
+            <input type="text" id="searchInput" placeholder="Search by Subject" oninput="filterResults()">
+            <button onclick="downloadResults()">Download Results</button>
+        </div>
+
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Subject</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample Data -->
+                <tr>
+                    <td>John Doe</td>
+                    <td>Mathematics</td>
+                    <td>85</td>
+                    <td>Pass</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>Science</td>
+                    <td>70</td>
+                    <td>Pass</td>
+                </tr>
+                <tr>
+                    <td>Mark Johnson</td>
+                    <td>English</td>
+                    <td>45</td>
+                    <td>Fail</td>
+                </tr>
+                <!-- More results can be added here -->
+            </tbody>
+        </table>
+
+        <h3>Feedback</h3>
+        <form id="feedbackForm">
+            <textarea id="feedback" rows="4" placeholder="Share your feedback here..."></textarea><br>
+            <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+        </form>
+    </div>
+
+    <script>
+        function filterResults() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const table = document.getElementById('resultsTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip header row
+                const cells = rows[i].getElementsByTagName('td');
+                let subjectMatch = false;
+
+                if (cells.length > 1) {
+                    const subject = cells[1].textContent.toLowerCase();
+                    subjectMatch = subject.includes(input);
+                }
+
+                rows[i].style.display = subjectMatch ? '' : 'none';
+            }
+        }
+
+        function downloadResults() {
+            const table = document.getElementById('resultsTable');
+            const rows = Array.from(table.rows);
+            const csvContent = rows.map(row => {
+                const cols = Array.from(row.cells).map(cell => cell.textContent);
+                return cols.join(","); // Join columns with comma
+            }).join("\n"); // Join rows with newline
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.setAttribute('download', 'exam_results.csv'); // Set the filename for download
+            document.body.appendChild(a); // Append link to body
+            a.click(); // Trigger the download
+            document.body.removeChild(a); // Clean up
+        }
+
+        function submitFeedback() {
+            const feedback = document.getElementById("feedback").value;
+            if (feedback) {
+                // Logic to save or send feedback (e.g., to an API or local storage)
+                alert("Feedback submitted successfully!");
+                document.getElementById("feedback").value = ""; // Clear the feedback textarea
+            } else {
+                alert("Please enter your feedback before submitting.");
+            }
+        }
+    </script>
+</body>
+</html>

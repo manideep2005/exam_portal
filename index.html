@@ -8,131 +8,154 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <style>
         * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-body {
-    background-color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-}
+        body {
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-.container {
-    display: flex;
-    width: 80%;
-    max-width: 900px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
+        .container {
+            display: flex;
+            flex-direction: column; /* Change to column for better responsiveness */
+            width: 90%; /* Make the width responsive */
+            max-width: 900px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
 
-.image-box {
-    flex: 1.5;
-    background: linear-gradient(to right, #ff4e50, #f9d423);
-    border-radius: 15px 0 0 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .image-box {
+            flex: 1;
+            background: linear-gradient(to right, #ff4e50, #f9d423);
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Add padding for better spacing */
+        }
 
-.image-box img {
-    width: 80%;
-    height: auto;
-    border-radius: 15px 0 0 15px;
-}
+        .image-box img {
+            width: 100%; /* Use 100% width for responsiveness */
+            height: auto;
+            max-width: 300px; /* Limit the max width of the image */
+            border-radius: 15px 15px 0 0;
+        }
 
-.login-box {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+        .login-box {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-.tab-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
+        .tab-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
 
-.tab {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 1px solid #ff4e50;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ff4e50;
+            border-radius: 5px;
+            transition: background 0.3s;
+            flex: 1; /* Make tabs take equal space */
+            text-align: center; /* Center align the tab text */
+        }
 
-.tab.active {
-    background-color: #ff4e50;
-    color: white;
-}
+        .tab.active {
+            background-color: #ff4e50;
+            color: white;
+        }
 
-.form-group {
-    margin: 20px 0;
-    position: relative;
-}
+        .form-group {
+            margin: 15px 0;
+            position: relative;
+        }
 
-.form-group input {
-    width: 100%;
-    padding: 10px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s;
-}
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
 
-.form-group input:focus {
-    border-color: #ff4e50;
-}
+        .form-group input:focus {
+            border-color: #ff4e50;
+        }
 
-button {
-    width: 100%;
-    padding: 12px;
-    background: #ff4e50;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #ff4e50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
 
-button:hover {
-    background: #f9d423;
-}
+        button:hover {
+            background: #f9d423;
+        }
 
-.hidden {
-    display: none;
-}
+        .hidden {
+            display: none;
+        }
 
-.tab-content {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
+        .tab-content, .registration-box {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
 
-.tab-content.active {
-    opacity: 1;
-    transform: translateY(0);
-}
+        .tab-content.active, .registration-box.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .tab-container {
+                flex-direction: column; /* Stack tabs vertically on small screens */
+            }
+
+            .tab {
+                margin-bottom: 10px; /* Add space between stacked tabs */
+            }
+
+            .login-box {
+                padding: 20px; /* Reduce padding on smaller screens */
+            }
+
+            .image-box img {
+                max-width: 100%; /* Ensure image is responsive */
+            }
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <div class="image-box">
             <img src="pic.png" alt="Login Illustration">
@@ -143,7 +166,7 @@ button:hover {
                 <div class="tab" onclick="switchTab('faculty')">Faculty</div>
             </div>
 
-            <!-- Student Registration/Login Form -->
+            <!-- Student Login -->
             <div id="student" class="tab-content active">
                 <h2>Student Login</h2>
                 <form id="studentForm">
@@ -155,10 +178,10 @@ button:hover {
                     </div>
                     <button type="submit">Login</button>
                 </form>
-                <button onclick="registerStudent()">Register as New Student</button>
+                <button onclick="toggleRegistrationBox('student')">Register as New Student</button>
             </div>
 
-            <!-- Faculty Registration/Login Form -->
+            <!-- Faculty Login -->
             <div id="faculty" class="tab-content">
                 <h2>Faculty Login</h2>
                 <form id="facultyForm">
@@ -170,61 +193,129 @@ button:hover {
                     </div>
                     <button type="submit">Login</button>
                 </form>
-                <button onclick="registerFaculty()">Register as New Faculty</button>
+                <button onclick="toggleRegistrationBox('faculty')">Register as New Faculty</button>
+            </div>
+
+            <!-- Registration Box -->
+            <div id="registrationBox" class="registration-box hidden">
+                <h2>Register</h2>
+                <div id="registerStudent" class="register-content hidden">
+                    <form id="registrationForm">
+                        <div class="form-group">
+                            <input type="text" id="studentFullName" required placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="studentUsernameReg" required placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="studentPasswordReg" required placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="studentEmail" required placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="studentPhone" required placeholder="Phone Number">
+                        </div>
+                        <button type="button" onclick="registerStudent()">Submit Registration</button>
+                    </form>
+                    <button onclick="toggleRegistrationBox()">Back to Login</button>
+                </div>
+
+                <div id="registerFaculty" class="register-content hidden">
+                    <form id="facultyRegistrationForm">
+                        <div class="form-group">
+                            <input type="text" id="facultyFullName" required placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="facultyUsernameReg" required placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="facultyPasswordReg" required placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="facultyEmail" required placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="facultyPhone" required placeholder="Phone Number">
+                        </div>
+                        <button type="button" onclick="registerFaculty()">Submit Registration</button>
+                    </form>
+                    <button onclick="toggleRegistrationBox()">Back to Login</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Function to switch tabs
         function switchTab(tab) {
             const tabs = document.querySelectorAll('.tab-content');
             const tabLinks = document.querySelectorAll('.tab');
             tabs.forEach(t => {
-                if (t.id === tab) {
-                    t.classList.add('active');
-                    gsap.fromTo(t, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 });
-                } else {
-                    gsap.to(t, { opacity: 0, y: 20, duration: 0.3, onComplete: () => {
-                        t.classList.remove('active');
-                    }});
-                }
+                t.classList.toggle('active', t.id === tab);
             });
-            tabLinks.forEach(link => link.classList.remove('active'));
-            document.querySelector(`.tab[onclick="switchTab('${tab}')"]`).classList.add('active');
+            tabLinks.forEach(link => link.classList.toggle('active', link.onclick.toString().includes(tab)));
         }
 
-        // Function to register a new student and save to local storage
+        function toggleRegistrationBox(userType = '') {
+            const registrationBox = document.getElementById('registrationBox');
+            const loginBoxes = document.querySelectorAll('.tab-content');
+            const registerStudent = document.getElementById('registerStudent');
+            const registerFaculty = document.getElementById('registerFaculty');
+            const isHidden = registrationBox.classList.contains('hidden');
+
+            if (isHidden) {
+                registrationBox.classList.remove('hidden');
+                registrationBox.classList.add('active');
+                gsap.fromTo(registrationBox, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 });
+                loginBoxes.forEach(box => box.classList.add('hidden'));
+                
+                if (userType === 'student') {
+                    registerStudent.classList.remove('hidden');
+                } else {
+                    registerFaculty.classList.remove('hidden');
+                }
+            } else {
+                registrationBox.classList.add('hidden');
+                loginBoxes.forEach(box => box.classList.remove('hidden'));
+            }
+        }
+
         function registerStudent() {
-            const username = document.getElementById("studentUsername").value;
-            const password = document.getElementById("studentPassword").value;
+            const fullName = document.getElementById("studentFullName").value;
+            const username = document.getElementById("studentUsernameReg").value;
+            const password = document.getElementById("studentPasswordReg").value;
+            const email = document.getElementById("studentEmail").value;
+            const phone = document.getElementById("studentPhone").value;
 
-            if (username && password) {
-                let students = JSON.parse(localStorage.getItem("students")) || [];
-                students.push({ username, password });
-                localStorage.setItem("students", JSON.stringify(students));
+            if (fullName && username && password && email && phone) {
+                let users = JSON.parse(localStorage.getItem("students")) || [];
+                users.push({ fullName, username, password, email, phone });
+                localStorage.setItem("students", JSON.stringify(users));
                 alert("Student registered successfully!");
+                toggleRegistrationBox();
             } else {
-                alert("Please enter both username and password.");
+                alert("Please fill all details.");
             }
         }
 
-        // Function to register a new faculty and save to local storage
         function registerFaculty() {
-            const username = document.getElementById("facultyUsername").value;
-            const password = document.getElementById("facultyPassword").value;
+            const fullName = document.getElementById("facultyFullName").value;
+            const username = document.getElementById("facultyUsernameReg").value;
+            const password = document.getElementById("facultyPasswordReg").value;
+            const email = document.getElementById("facultyEmail").value;
+            const phone = document.getElementById("facultyPhone").value;
 
-            if (username && password) {
-                let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
-                faculty.push({ username, password });
-                localStorage.setItem("faculty", JSON.stringify(faculty));
+            if (fullName && username && password && email && phone) {
+                let users = JSON.parse(localStorage.getItem("faculty")) || [];
+                users.push({ fullName, username, password, email, phone });
+                localStorage.setItem("faculty", JSON.stringify(users));
                 alert("Faculty registered successfully!");
+                toggleRegistrationBox();
             } else {
-                alert("Please enter both username and password.");
+                alert("Please fill all details.");
             }
         }
 
-        // Handle student login
         document.getElementById("studentForm").onsubmit = function (event) {
             event.preventDefault();
             const username = document.getElementById("studentUsername").value;
@@ -240,7 +331,6 @@ button:hover {
             }
         };
 
-        // Handle faculty login
         document.getElementById("facultyForm").onsubmit = function (event) {
             event.preventDefault();
             const username = document.getElementById("facultyUsername").value;
@@ -255,6 +345,50 @@ button:hover {
                 alert("Invalid Faculty credentials.");
             }
         };
+
+        let studentFormSubmitted = false; // Flag to track student form submission
+let facultyFormSubmitted = false; // Flag to track faculty form submission
+
+document.getElementById("studentForm").onsubmit = function (event) {
+    event.preventDefault();
+    
+    if (studentFormSubmitted) return; // Prevent double submission
+    studentFormSubmitted = true; // Set the flag
+
+    const username = document.getElementById("studentUsername").value;
+    const password = document.getElementById("studentPassword").value;
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+
+    const studentExists = students.some(student => student.username === username && student.password === password);
+    if (studentExists) {
+        alert("Student Login Successful!");
+        window.location.href = "dashboard.html"; // Redirect to dashboard
+    } else {
+        alert("Invalid Student credentials.");
+        studentFormSubmitted = false; // Reset the flag for next submission
+    }
+};
+
+document.getElementById("facultyForm").onsubmit = function (event) {
+    event.preventDefault();
+    
+    if (facultyFormSubmitted) return; // Prevent double submission
+    facultyFormSubmitted = true; // Set the flag
+
+    const username = document.getElementById("facultyUsername").value;
+    const password = document.getElementById("facultyPassword").value;
+    const faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    const facultyExists = faculty.some(fac => fac.username === username && fac.password === password);
+    if (facultyExists) {
+        alert("Faculty Login Successful!");
+        window.location.href = "dashboard.html"; // Redirect to dashboard
+    } else {
+        alert("Invalid Faculty credentials.");
+        facultyFormSubmitted = false; // Reset the flag for next submission
+    }
+};
+
     </script>
 </body>
 </html>
