@@ -1,0 +1,90 @@
+<!-- Faculty Dashboard -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; font-family: 'Inter', sans-serif; }
+        .dashboard { display: flex; height: 100vh; }
+        .sidebar {
+            background: #1DD1A1;
+            color: #fff;
+            width: 250px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .sidebar h2 { font-family: 'Pacifico', cursive; }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            cursor: pointer;
+        }
+        .sidebar a:hover { background: rgba(255,255,255,0.3); }
+        .content {
+            flex: 1;
+            padding: 20px;
+            background: linear-gradient(135deg, #6e45e2, #88d3ce);
+            color: #fff;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <div class="sidebar">
+        <h2>Faculty Dashboard</h2>
+        <a onclick="showCreateExam()">Create Exam</a>
+        <a onclick="viewFeedback()">View Feedback</a>
+        <a onclick="viewChat()">Communicate with Students</a>
+    </div>
+    <div class="content" id="facultyContent">
+        <h3>Welcome to the Faculty Dashboard!</h3>
+    </div>
+</div>
+
+<script>
+    function showCreateExam() {
+        document.getElementById('facultyContent').innerHTML = `
+            <h3>Create New Exam</h3>
+            <input id="subject" placeholder="Subject"/><br/>
+            <input id="date" placeholder="Date (YYYY-MM-DD)"/><br/>
+            <button onclick="createExam()">Create</button>
+        `;
+    }
+
+    function createExam() {
+        const subject = document.getElementById('subject').value;
+        const date = document.getElementById('date').value;
+        const exams = JSON.parse(localStorage.getItem('exams')) || [];
+        exams.push({ subject, date });
+        localStorage.setItem('exams', JSON.stringify(exams));
+        alert('Exam created!');
+    }
+
+    function viewFeedback() {
+        const feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+        document.getElementById('facultyContent').innerHTML = `
+            <h3>Student Feedback</h3>
+            ${feedbacks.map(f => `<p>${f}</p>`).join('')}
+        `;
+    }
+
+    function viewChat() {
+        const messages = JSON.parse(localStorage.getItem('messages')) || [];
+        document.getElementById('facultyContent').innerHTML = `
+            <h3>Messages from Students</h3>
+            ${messages.map(m => `<p>${m}</p>`).join('')}
+        `;
+    }
+</script>
+</body>
+</html>
